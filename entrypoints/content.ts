@@ -1,6 +1,10 @@
 export default defineContentScript({
-  matches: ['*://*.google.com/*'],
-  main() {
-    console.log('Hello content.');
-  },
+  matches: ['*://*/*'],
+  // world: 'MAIN',
+  async main() {
+    console.log('Injecting script...');
+    // @ts-ignore
+    await injectScript('/main-world-content.js', {
+    });
+    console.log('Done!');  },
 });
