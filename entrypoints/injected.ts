@@ -6,5 +6,6 @@ export default defineUnlistedScript(async () => {
     // 接收 popup 消息
     onMessage('Inject.generateCode', (message) => {
         console.log('success in injected --------------- ', message.data)
+        sendMessage('Inject.generateCode.callback', { data: 'injected -> content' }, 'popup')   
     })
 });

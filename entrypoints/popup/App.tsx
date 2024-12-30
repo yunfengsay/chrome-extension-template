@@ -32,6 +32,10 @@ function App() {
       }
     };
     getCurrentTab();
+    onMessage('Inject.generateCode.callback', (message) => {
+      console.log('callback in popup --------------- ', message.data)
+      setButtonState('success');
+    })
   }, []);
 
   const handleClick = async () => {
