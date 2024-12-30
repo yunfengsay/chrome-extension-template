@@ -21,11 +21,25 @@ const CheckIcon = () => (
 function App() {
   const [count, setCount] = useState(0);
   const [buttonState, setButtonState] = useState<'idle' | 'loading' | 'success'>('idle');
+  const [currentTabId, setCurrentTabId] = useState<number | null>(null);
+
+  // 添加useEffect来获取当前标签页ID
+  useEffect(() => {
+    const getCurrentTab = async () => {
+      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+      if (tab?.id) {
+        setCurrentTabId(tab.id);
+      }
+    };
+    getCurrentTab();
+  }, []);
 
   const handleClick = async () => {
     if (buttonState !== 'idle') return;
-    sendMessage('Inject.generateCode', { data: 'hi' }, 'window')
-
+    // 使用获取到的tabId
+    if (currentTabId) {
+      sendMessage('Inject.generateCode', { data: 'hi' }, `window@${currentTabId}`)
+    }
 
     setButtonState('loading');
     // 模拟异步操作
