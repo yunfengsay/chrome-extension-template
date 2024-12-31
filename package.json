@@ -1,6 +1,6 @@
 {
-  "name": "ncode-mgdone-ext",
-  "description": "nature code mgdone extension",
+  "name": "chromext",
+  "description": "chrome extension",
   "private": true,
   "version": "0.0.1",
   "type": "module",
